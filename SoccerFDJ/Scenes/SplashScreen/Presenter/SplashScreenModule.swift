@@ -12,13 +12,15 @@ class SplashScreenModule {
     func makeView() -> UIViewController {
         
         guard let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SplashScreenViewController") as? SplashScreenViewController else {
-            fatalError()
+            return UIViewController()
         }
         
         let router = SplashScreenRouter()
         let presenter = SplashScreenPresenter(router: router)
+        
         viewController.presenter = presenter
         router.splashViewController = viewController
+        
         return viewController
     }
 }

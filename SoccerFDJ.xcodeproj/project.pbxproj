@@ -11,6 +11,7 @@
 		7200B9FB23C12E3B0065C97C /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200B9FA23C12E3B0065C97C /* SplashScreenViewController.swift */; };
 		7200BA0023C1E3430065C97C /* League.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200B9FF23C1E3430065C97C /* League.swift */; };
 		7200BA0223C1E36B0065C97C /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200BA0123C1E36B0065C97C /* Team.swift */; };
+		7200BA0523C1EC520065C97C /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200BA0423C1EC520065C97C /* RequestManager.swift */; };
 		721063F923BF9625002FBAFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721063F823BF9625002FBAFE /* AppDelegate.swift */; };
 		721063FB23BF9625002FBAFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721063FA23BF9625002FBAFE /* SceneDelegate.swift */; };
 		721063FD23BF9625002FBAFE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721063FC23BF9625002FBAFE /* HomeViewController.swift */; };
@@ -50,6 +51,7 @@
 		7200B9FA23C12E3B0065C97C /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		7200B9FF23C1E3430065C97C /* League.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = League.swift; sourceTree = "<group>"; };
 		7200BA0123C1E36B0065C97C /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		7200BA0423C1EC520065C97C /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		721063F523BF9625002FBAFE /* SoccerFDJ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoccerFDJ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		721063F823BF9625002FBAFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		721063FA23BF9625002FBAFE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		7200BA0323C1EC1C0065C97C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7200BA0423C1EC520065C97C /* RequestManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		721063EC23BF9625002FBAFE = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +170,7 @@
 				7200B9FC23C1E2D70065C97C /* Model */,
 				7210642D23BF9980002FBAFE /* Repositories */,
 				7210642823BF9638002FBAFE /* Scenes */,
+				7200BA0323C1EC1C0065C97C /* Services */,
 				7210640123BF962B002FBAFE /* Assets.xcassets */,
 				7210640623BF962B002FBAFE /* Info.plist */,
 			);
@@ -416,6 +427,7 @@
 				721063FD23BF9625002FBAFE /* HomeViewController.swift in Sources */,
 				7210643023BF9998002FBAFE /* LeaguesRepository.swift in Sources */,
 				7200B9FB23C12E3B0065C97C /* SplashScreenViewController.swift in Sources */,
+				7200BA0523C1EC520065C97C /* RequestManager.swift in Sources */,
 				721063F923BF9625002FBAFE /* AppDelegate.swift in Sources */,
 				721063FB23BF9625002FBAFE /* SceneDelegate.swift in Sources */,
 				7200B9F723C10BEB0065C97C /* SplashScreenModule.swift in Sources */,
