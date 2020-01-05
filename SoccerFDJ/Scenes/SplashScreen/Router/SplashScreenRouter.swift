@@ -16,7 +16,7 @@ final class SplashScreenRouter: SplashScreenRouterProtocol {
     weak var splashViewController: UIViewController?
     
     private func makeHomeViewController() -> HomeViewController {
-        let presenter = HomePresenter(leaguesRepository: LeaguesRepository())
+        let presenter = HomePresenter(leaguesRepository: LeaguesDataRepository())
         
 //        let router = HomeRouter()
         

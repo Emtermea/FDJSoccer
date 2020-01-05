@@ -39,14 +39,14 @@ final class HomePresenter {
     
     weak var delegate: HomePresenterDelegate?
     
-    private let leaguesRepository: LeaguesRepositoryProtocol
+    private let leaguesRepository: LeaguesDataRepositoryProtocol
     
     private var currentSeachLeagues: [HomeListOfLeaguesViewModelProtocol] = []
     private var currentTeamLeague: [HomeListOfTeamViewModelProtocol] = []
     
     // MARK:  Init
     
-    init(leaguesRepository: LeaguesRepositoryProtocol) {
+    init(leaguesRepository: LeaguesDataRepositoryProtocol) {
         self.leaguesRepository = leaguesRepository
     }
     

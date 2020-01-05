@@ -14,9 +14,11 @@ protocol SplashScreenPresenterProtocol {
 
 final class SplashScreenPresenter {
     private let router: SplashScreenRouterProtocol
+    private let leaguesApiRepository: LeaguesApiRepositoryProtocol
     
-    init(router: SplashScreenRouterProtocol) {
+    init(router: SplashScreenRouterProtocol, leaguesApiRepository: LeaguesApiRepositoryProtocol = LeaguesApiRepository()) {
         self.router = router
+        self.leaguesApiRepository = leaguesApiRepository
     }
     
 }
@@ -24,12 +26,16 @@ final class SplashScreenPresenter {
 extension SplashScreenPresenter: SplashScreenPresenterProtocol {
     func retrieve() {
         print("SPLASHSCREEN PRESENTER")
-//        self.repo1.retrieve(success: { leagues in
-//            self.repo2.save(request == leagues)
-//
-//            self.router.routeToHome()
-//        }, failure: {
-//            // quoi faire ici ?
-//        })
+        
+        self.leaguesApiRepository.retrieve(success: { leagues in
+            print(leagues)
+            //save
+            //router
+            
+        }, failure: { error in
+            //router
+            //alert in home VC
+        })
+        
     }
 }

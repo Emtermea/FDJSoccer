@@ -10,6 +10,10 @@ import Foundation
 
 struct Leagues: Codable {
     let leagues: [League]
+    
+    var isEmpty: Bool {
+        return self.leagues.isEmpty
+    }
 }
 
 struct League: Codable {
