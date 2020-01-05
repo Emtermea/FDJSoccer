@@ -10,21 +10,28 @@ import Foundation
 
 struct Teams: Codable {
     let teams: [Team]
+    
+    var isEmpty: Bool {
+        return self.teams.isEmpty
+    }
 }
 
-struct Team: Codable {
-
-    let leagueId: String
-    let teamId: String
-    let leagueName: String
-    let teamName: String
-    let teamBadge: String
-    
-    enum CodingKeys: String, CodingKey {
-        case leagueId = "idLeague"
-        case teamId = "idTeam"
-        case leagueName = "strLeague"
-        case teamName = "strTeam"
-        case teamBadge = "strTeamBadge"
+extension Teams {
+    struct Team: Codable {
+        
+        let id: String
+        let name: String
+        let badge: String
+        let leagueName: String
+        let leagueId: String
+        
+        enum CodingKeys: String, CodingKey {
+            
+            case id = "idTeam"
+            case name = "strTeam"
+            case badge = "strTeamBadge"
+            case leagueId = "idLeague"
+            case leagueName = "strLeague"
+        }
     }
 }

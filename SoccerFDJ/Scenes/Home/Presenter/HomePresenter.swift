@@ -16,8 +16,8 @@ protocol HomeLeaguesListViewModelProtocol {
     var title: String { get }
 }
 
-protocol HomeListOfTeamViewModelProtocol {
-    var image: UIImage { get }
+protocol HomeTeamsListViewModelProtocol {
+    var imageUrl: String { get }
 }
 
 protocol HomePresenterProtocol {
@@ -26,12 +26,19 @@ protocol HomePresenterProtocol {
     func numberOfRows() -> Int
     func numberOfSections() -> Int
     func cellViewModelForRowAt(_ index: Int) -> HomeLeaguesListViewModelProtocol?
-    func didSelect(_ index: Int)
+    func didSelectLeague(_ index: Int)
+    
+    func numberOfItemsInCollection() -> Int
+    func numberOfSectionsInCollection() -> Int
+    func collectionCellViewModelForItemAt(_ index: Int) -> HomeTeamsListViewModelProtocol?
+    func didSelectCollectionView(_ index: Int)
 }
 
 protocol HomePresenterDelegate: class {
     func hideSearchController()
     func displayLeaguesSearch()
+    
+    func reloadTeams()
 }
 
 final class HomePresenter {
@@ -39,18 +46,19 @@ final class HomePresenter {
     // MARK:  Properties
     
     weak var delegate: HomePresenterDelegate?
-    
     private let leaguesRepository: LeaguesDataRepositoryProtocol
     private var currentSearchLeagues: [HomeLeaguesListViewModelProtocol] = []
-    private var currentTeamLeague: [HomeListOfTeamViewModelProtocol] = []
+    private var currentLeagueTeams: [HomeTeamsListViewModelProtocol] = []
     private var workItem = DispatchWorkItem(block: {})
+    private let teamsRepository: TeamsRepositoryProtocol
     
     // MARK:  Init
     
-    init(leaguesRepository: LeaguesDataRepositoryProtocol) {
+    init(leaguesRepository: LeaguesDataRepositoryProtocol,
+         teamsRepository: TeamsRepositoryProtocol) {
         self.leaguesRepository = leaguesRepository
+        self.teamsRepository = teamsRepository
     }
-    
 }
 
 extension HomePresenter: HomePresenterProtocol {
@@ -97,29 +105,55 @@ extension HomePresenter: HomePresenterProtocol {
         return self.currentSearchLeagues[index]
     }
     
-    func didSelect(_ index: Int) {
-                    // TODO: check si index exist
-            //        self.currentSeachLeagues[index] else { return nil }
+    func didSelectLeague(_ index: Int) {
+        guard index < self.currentSearchLeagues.count else { return }
         
-        //  FAIRE DELETE HIDE SEARCH == tableView
-        
-        // self.delegate?.hideSearch()
-        
-        
-//        let league = self.currentSeachLeagues[index]
-        
-//        self.teamRepository.retrieveBy(league, success: { teams in
-//            convert teams via => viewModel
-//
-//            currentTeamLeague == viewModel
-//
-//            delegate refresh collection view
-//        }, failure: { error in
-//             delegate error
-//        })
+        let league = self.currentSearchLeagues[index]
+        self.teamsRepository.retrieveTeams(in: league.title, success: {[weak self] teams in
+            guard let self = self else { return }
+            self.delegate?.hideSearchController()
+            
+            self.currentLeagueTeams = teams.teams.map {
+                HomeTeamsListViewModel(imageUrl: $0.badge)
+            }
+            self.delegate?.reloadTeams()
+            
+            }, failure: { error in
+                //TO DO
+                //Create error alert
+                print("error to retrieve in presenter")
+        })
     }
+    
+    // MARK: Collection
+    
+    func numberOfItemsInCollection() -> Int {
+        return currentLeagueTeams.count
+    }
+    
+    func numberOfSectionsInCollection() -> Int {
+        return 1
+    }
+    
+    func collectionCellViewModelForItemAt(_ index: Int) -> HomeTeamsListViewModelProtocol? {
+        guard index < self.currentLeagueTeams.count else { return nil }
+        return self.currentLeagueTeams[index]
+    }
+    
+    func didSelectCollectionView(_ index: Int) {
+        guard index < self.currentLeagueTeams.count else { return }
+        self.delegate?.reloadTeams()
+        
+        let viewModel = self.currentLeagueTeams[index]
+        // TO DO: handle selection
+    }
+    
 }
 
 private struct HomeLeaguesListViewModel: HomeLeaguesListViewModelProtocol {
     var title: String
+}
+
+private struct HomeTeamsListViewModel: HomeTeamsListViewModelProtocol {
+    var imageUrl: String
 }

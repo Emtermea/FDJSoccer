@@ -13,10 +13,6 @@ enum LeaguesApiRepositoryError: Error {
     case error(Error)
 }
 
-protocol LeaguesApiRepositoryItemProtocol {
-    var leagueName: String { get }
-}
-
 protocol LeaguesApiRepositoryProtocol {
     //    func retrieve(success: @escaping ([AllLeaguesRepositoryItemProtocol]) -> Void,
     //                  failure: @escaping (AllLeaguesRepositoryError) -> Void) {
@@ -66,7 +62,3 @@ extension LeaguesApiRepository: LeaguesApiRepositoryProtocol {
         // Ce n'est pas le repo qui décide de save mais le métier == PRESENTER
     }
 }
-
-//private struct AllLeaguesRepositoryItem: AllLeaguesRepositoryItemProtocol {
-//    var leagueName: String
-//}

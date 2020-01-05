@@ -13,14 +13,11 @@ private let baseUrl: String = "https://www.thesportsdb.com/api/v1/json/1/"
 
 protocol RequestManagerProtocol {
     func fetchLeagues() -> DataRequest
+    func fetchTeams(in league: String) -> DataRequest
 }
 
 final class RequestManager {
     
-//    static let shared = RequestManager()
-//    
-//    private init() {}
-   
 }
 
 extension RequestManager: RequestManagerProtocol {
@@ -29,12 +26,8 @@ extension RequestManager: RequestManagerProtocol {
         return AF.request(urlLeagues)
     }
     
-    /*
-       func fetchTeams(_ searchTeam: String) -> DataRequest {
-           let urlTeams = URL(string: "\(baseUrl)search_all_teams.php?l=\(searchTeam.replacingOccurrences(of: " ", with: "%20"))")!
-           return AF.request(urlTeams)
-       }
-        */
+    func fetchTeams(in league: String) -> DataRequest {
+        let urlTeams = URL(string: "\(baseUrl)search_all_teams.php?l=\(league.replacingOccurrences(of: " ", with: "%20"))")!
+        return AF.request(urlTeams)
+    }
 }
-
-

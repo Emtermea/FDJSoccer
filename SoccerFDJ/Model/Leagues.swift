@@ -22,7 +22,7 @@ extension Leagues {
         let name: String
         let sport: String
         
-        var teams: [Team] = []
+        var teams: [Teams.Team] = []
         
         enum CodingKeys: String, CodingKey {
             case id = "idLeague"

@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,21 +16,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Z9G-2f-TiM">
+                                <rect key="frame" x="16" y="44" width="382" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xct-OD-aQa">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="b5A-Jj-DBy">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="awh-NQ-mMI">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Ci-wj-EjO">
-                                <rect key="frame" x="20" y="44" width="374" height="818"/>
+                                <rect key="frame" x="16" y="44" width="382" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="3Ci-wj-EjO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="2fQ-ZJ-SFG"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="3Ci-wj-EjO" secondAttribute="bottom" id="MiK-H6-KUq"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="3Ci-wj-EjO" secondAttribute="trailing" id="mKv-K7-WK4"/>
-                            <constraint firstItem="3Ci-wj-EjO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="oeC-l2-wdc"/>
+                            <constraint firstItem="Z9G-2f-TiM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="25X-W4-5La"/>
+                            <constraint firstItem="3Ci-wj-EjO" firstAttribute="trailing" secondItem="Z9G-2f-TiM" secondAttribute="trailing" id="7GX-1x-Xyk"/>
+                            <constraint firstItem="Z9G-2f-TiM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="J8O-eX-QTh"/>
+                            <constraint firstItem="3Ci-wj-EjO" firstAttribute="top" secondItem="Z9G-2f-TiM" secondAttribute="top" id="Jfc-PC-Y1B"/>
+                            <constraint firstItem="3Ci-wj-EjO" firstAttribute="leading" secondItem="Z9G-2f-TiM" secondAttribute="leading" id="P2t-SI-269"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Z9G-2f-TiM" secondAttribute="bottom" id="gxJ-X8-agh"/>
+                            <constraint firstItem="Z9G-2f-TiM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hdf-nD-kpa"/>
+                            <constraint firstItem="3Ci-wj-EjO" firstAttribute="bottom" secondItem="Z9G-2f-TiM" secondAttribute="bottom" id="p2j-38-lGR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="Z9G-2f-TiM" id="ZnH-e8-8FE"/>
                         <outlet property="tableView" destination="3Ci-wj-EjO" id="Pg9-dJ-5aB"/>
                     </connections>
                 </viewController>

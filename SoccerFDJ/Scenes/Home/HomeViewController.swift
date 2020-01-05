@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
     
     //MARK: IBOutlet
     @IBOutlet private(set) weak var tableView: UITableView!
+    @IBOutlet private(set) weak var collectionView: UICollectionView!
     
     //MARK: Properties
     lazy var searchController: UISearchController = {
@@ -26,7 +27,7 @@ class HomeViewController: UIViewController {
     var presenter: HomePresenterProtocol!
     
     private let autoCompletionCellIdentifier = "AutoCompletionTableViewCell"
-    private let collectionCellIdentifier = "CollectionViewCell"
+    private let collectionCellIdentifier = "TeamCollectionViewCell"
     
     
     //MARK: Lifecyle
@@ -35,9 +36,19 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationItem.setHidesBackButton(true, animated: false)
+        self.setupView()
         self.setupSearchController()
         self.setupTableView()
         self.setupCollectionView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    private func setupView() {
+        self.view.backgroundColor = .white
     }
     
     private func setupSearchController() {
@@ -51,10 +62,14 @@ class HomeViewController: UIViewController {
         self.tableView.tableFooterView = UIView()
         self.tableView.register(UINib(nibName: autoCompletionCellIdentifier, bundle: nil), forCellReuseIdentifier: autoCompletionCellIdentifier)
         self.hideSearchController()
+        self.tableView.backgroundColor = .white
     }
     
     private func setupCollectionView() {
-        
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.register(UINib(nibName: collectionCellIdentifier, bundle: nil), forCellWithReuseIdentifier: collectionCellIdentifier)
+        self.collectionView.backgroundColor = .white
     }
     
 }
@@ -68,6 +83,15 @@ extension HomeViewController: HomePresenterDelegate {
         self.tableView.reloadData()
         self.tableView.isHidden = false
     }
+    
+    func reloadTeams() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+        
+        self.searchController.isActive = false
+    }
+    
 }
 
 extension HomeViewController: UISearchResultsUpdating {
@@ -79,16 +103,18 @@ extension HomeViewController: UISearchResultsUpdating {
 }
 
 extension HomeViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.presenter.didSelectLeague(indexPath.row)
+    }
 }
 
 extension HomeViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.presenter.numberOfSections()
+        self.presenter.numberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.presenter.numberOfRows()
+        self.presenter.numberOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,10 +125,42 @@ extension HomeViewController: UITableViewDataSource {
         }
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.didSelect(indexPath.row)
+}
+
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.presenter.didSelectCollectionView(indexPath.item)
+    }
+}
+
+extension HomeViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        self.presenter.numberOfSectionsInCollection()
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        self.presenter.numberOfItemsInCollection()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionCellIdentifier, for: indexPath)
+        
+        if let teamCell = cell as? TeamCollectionViewCell {
+            teamCell.viewModel = self.presenter.collectionCellViewModelForItemAt(indexPath.item)
+        }
+        return cell
+    }
+    
+    
+}
+
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (collectionView.bounds.width / 2.0), height: 100.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
 }
 
