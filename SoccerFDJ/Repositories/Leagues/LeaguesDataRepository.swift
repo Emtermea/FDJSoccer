@@ -64,7 +64,8 @@ extension LeaguesDataRepository: LeaguesDataRepositoryProtocol {
                            success: @escaping ([Leagues.League]) -> Void,
                            failure: @escaping (LeaguesDataRepositoryError) -> Void) {
         let filtered = LeaguesData.shared.leagues.leagues.filter {
-            $0.name.caseInsensitiveCompare(name) == .orderedSame
+//            $0.name.caseInsensitiveCompare(name) == .orderedSame
+            $0.name.lowercased().contains(name.lowercased())
         }
         
         if filtered.isEmpty {

@@ -9,13 +9,16 @@
 import UIKit
 
 class SplashScreenViewController: UIViewController {
+    
     // MARK: - Property
-
+    
     var presenter: SplashScreenPresenterProtocol!
 
+    //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter.retrieve()
+        self.presenter.retrieve()
     }
 }

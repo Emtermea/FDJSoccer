@@ -25,11 +25,16 @@ class HomeViewController: UIViewController {
     
     var presenter: HomePresenterProtocol!
     
+    private let autoCompletionCellIdentifier = "AutoCompletionTableViewCell"
+    private let collectionCellIdentifier = "CollectionViewCell"
+    
+    
     //MARK: Lifecyle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationItem.setHidesBackButton(true, animated: false)
         self.setupSearchController()
         self.setupTableView()
         self.setupCollectionView()
@@ -41,10 +46,11 @@ class HomeViewController: UIViewController {
     }
     
     private func setupTableView() {
-        // faire barre search + > 3 char + delay 0.2
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        //        self.presenter.retrieveBy(league: "lig")
+        self.tableView.tableFooterView = UIView()
+        self.tableView.register(UINib(nibName: autoCompletionCellIdentifier, bundle: nil), forCellReuseIdentifier: autoCompletionCellIdentifier)
+        self.hideSearchController()
     }
     
     private func setupCollectionView() {
@@ -54,12 +60,13 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: HomePresenterDelegate {
-    func emptyLeague() {
-        //error
+    func hideSearchController() {
+        self.tableView.isHidden = true
     }
     
     func displayLeaguesSearch() {
-        //        tableview.reloadData()
+        self.tableView.reloadData()
+        self.tableView.isHidden = false
     }
 }
 
@@ -67,11 +74,9 @@ extension HomeViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-        self.presenter.retrieveBy(name: text)
+        self.presenter.debounceSearch(name: text)
     }
-    
 }
-
 
 extension HomeViewController: UITableViewDelegate {
     
@@ -79,24 +84,19 @@ extension HomeViewController: UITableViewDelegate {
 
 extension HomeViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        //        return presenter.numberOfSections()
-        return 1
+        return self.presenter.numberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        return presenter.numberOfRows()
-        return 4
+        return self.presenter.numberOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //        guard let cell dispatchQueue
+        let cell = tableView.dequeueReusableCell(withIdentifier: autoCompletionCellIdentifier, for: indexPath)
         
-        let cell = UITableViewCell()
-        
-        //        let viewModel = presenter.cellForRowAt(indexPath.row)
-        
-        //        cell.configure(viewModel)
-        
+        if let autoCompleteCell = cell as? AutoCompletionTableViewCell {
+            autoCompleteCell.viewModel = self.presenter.cellViewModelForRowAt(indexPath.row)
+        }
         return cell
     }
     

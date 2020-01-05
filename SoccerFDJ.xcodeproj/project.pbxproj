@@ -16,6 +16,8 @@
 		7200BA0B23C1F6820065C97C /* LeaguesDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200BA0A23C1F6820065C97C /* LeaguesDataRepository.swift */; };
 		7200BA0D23C229CA0065C97C /* LeaguesApiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200BA0C23C229CA0065C97C /* LeaguesApiRepository.swift */; };
 		7200BA0F23C233D50065C97C /* LeaguesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200BA0E23C233D50065C97C /* LeaguesData.swift */; };
+		7200BA1323C269940065C97C /* AutoCompletionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200BA1123C269940065C97C /* AutoCompletionTableViewCell.swift */; };
+		7200BA1423C269940065C97C /* AutoCompletionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7200BA1223C269940065C97C /* AutoCompletionTableViewCell.xib */; };
 		721063F923BF9625002FBAFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721063F823BF9625002FBAFE /* AppDelegate.swift */; };
 		721063FB23BF9625002FBAFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721063FA23BF9625002FBAFE /* SceneDelegate.swift */; };
 		721063FD23BF9625002FBAFE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721063FC23BF9625002FBAFE /* HomeViewController.swift */; };
@@ -59,6 +61,8 @@
 		7200BA0A23C1F6820065C97C /* LeaguesDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesDataRepository.swift; sourceTree = "<group>"; };
 		7200BA0C23C229CA0065C97C /* LeaguesApiRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaguesApiRepository.swift; sourceTree = "<group>"; };
 		7200BA0E23C233D50065C97C /* LeaguesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesData.swift; sourceTree = "<group>"; };
+		7200BA1123C269940065C97C /* AutoCompletionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompletionTableViewCell.swift; sourceTree = "<group>"; };
+		7200BA1223C269940065C97C /* AutoCompletionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoCompletionTableViewCell.xib; sourceTree = "<group>"; };
 		721063F523BF9625002FBAFE /* SoccerFDJ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoccerFDJ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		721063F823BF9625002FBAFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		721063FA23BF9625002FBAFE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -162,6 +166,15 @@
 			path = Teams;
 			sourceTree = "<group>";
 		};
+		7200BA1023C2694C0065C97C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7200BA1123C269940065C97C /* AutoCompletionTableViewCell.swift */,
+				7200BA1223C269940065C97C /* AutoCompletionTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		721063EC23BF9625002FBAFE = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +242,7 @@
 		7210642923BF9643002FBAFE /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				7200BA1023C2694C0065C97C /* View */,
 				7200B9F523C0FFD30065C97C /* Router */,
 				7210642A23BF9677002FBAFE /* Presenter */,
 				721063FC23BF9625002FBAFE /* HomeViewController.swift */,
@@ -401,6 +415,7 @@
 				7200BA0823C1F3740065C97C /* SplashScreen.storyboard in Resources */,
 				7210640223BF962B002FBAFE /* Assets.xcassets in Resources */,
 				7210640023BF9625002FBAFE /* Main.storyboard in Resources */,
+				7200BA1423C269940065C97C /* AutoCompletionTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +473,7 @@
 				721063FB23BF9625002FBAFE /* SceneDelegate.swift in Sources */,
 				7200BA0F23C233D50065C97C /* LeaguesData.swift in Sources */,
 				7200B9F723C10BEB0065C97C /* SplashScreenModule.swift in Sources */,
+				7200BA1323C269940065C97C /* AutoCompletionTableViewCell.swift in Sources */,
 				7210642C23BF968A002FBAFE /* HomePresenter.swift in Sources */,
 				7200BA0B23C1F6820065C97C /* LeaguesDataRepository.swift in Sources */,
 				7215738723BFA93F00F5BB67 /* SplashScreenRouter.swift in Sources */,

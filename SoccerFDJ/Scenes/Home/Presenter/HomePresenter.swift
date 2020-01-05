@@ -12,7 +12,7 @@ enum HomePresenterRetrieveByError: Error {
     case empty
 }
 
-protocol HomeListOfLeaguesViewModelProtocol {
+protocol HomeLeaguesListViewModelProtocol {
     var title: String { get }
 }
 
@@ -22,14 +22,15 @@ protocol HomeListOfTeamViewModelProtocol {
 
 protocol HomePresenterProtocol {
     func retrieveBy(name: String)
+    func debounceSearch(name: String)
     func numberOfRows() -> Int
     func numberOfSections() -> Int
-    func cellForRowAt(_ index: Int) -> HomeListOfLeaguesViewModelProtocol?
+    func cellViewModelForRowAt(_ index: Int) -> HomeLeaguesListViewModelProtocol?
     func didSelect(_ index: Int)
 }
 
 protocol HomePresenterDelegate: class {
-    func emptyLeague()
+    func hideSearchController()
     func displayLeaguesSearch()
 }
 
@@ -40,8 +41,9 @@ final class HomePresenter {
     weak var delegate: HomePresenterDelegate?
     
     private let leaguesRepository: LeaguesDataRepositoryProtocol
-    private var currentSearchLeagues: [HomeListOfLeaguesViewModelProtocol] = []
+    private var currentSearchLeagues: [HomeLeaguesListViewModelProtocol] = []
     private var currentTeamLeague: [HomeListOfTeamViewModelProtocol] = []
+    private var workItem = DispatchWorkItem(block: {})
     
     // MARK:  Init
     
@@ -57,15 +59,29 @@ extension HomePresenter: HomePresenterProtocol {
             guard let self = self else { return }
             
             self.currentSearchLeagues = leagues.map {
-                HomeListOfLeaguesViewModel(title: $0.name)
+                HomeLeaguesListViewModel(title: $0.name)
             }
             self.delegate?.displayLeaguesSearch()
             
         }, failure: {[weak self] error in
             guard let self = self else { return }
             
-            self.delegate?.emptyLeague()
+            self.delegate?.hideSearchController()
         })
+    }
+    
+    func debounceSearch(name: String) {
+        workItem.cancel()
+        guard name.count > 2 else {
+            self.delegate?.hideSearchController()
+            return
+        }
+        
+        workItem = DispatchWorkItem(block: {[weak self] in
+            guard let self = self else { return }
+            self.retrieveBy(name: name)
+        })
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: workItem)
     }
     
     func numberOfRows() -> Int {
@@ -76,10 +92,8 @@ extension HomePresenter: HomePresenterProtocol {
         return 1
     }
     
-    func cellForRowAt(_ index: Int) -> HomeListOfLeaguesViewModelProtocol? {
-        // TODO: check si index exist
-//        self.currentSeachLeagues[index] else { return nil }
-        
+    func cellViewModelForRowAt(_ index: Int) -> HomeLeaguesListViewModelProtocol? {
+        guard index < self.currentSearchLeagues.count else { return nil }
         return self.currentSearchLeagues[index]
     }
     
@@ -104,9 +118,8 @@ extension HomePresenter: HomePresenterProtocol {
 //             delegate error
 //        })
     }
-    
 }
 
-private struct HomeListOfLeaguesViewModel: HomeListOfLeaguesViewModelProtocol {
+private struct HomeLeaguesListViewModel: HomeLeaguesListViewModelProtocol {
     var title: String
 }
