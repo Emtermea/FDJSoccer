@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  SoccerFDJ
 //
 //  Created by Emmanuelle Termeau on 03/01/2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     @IBOutlet private(set) weak var tableView: UITableView!
     
@@ -27,7 +27,7 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: HomePresenterDelegate {
+extension HomeViewController: HomePresenterDelegate {
     func emptyLeague() {
         //error
     }
@@ -37,11 +37,11 @@ extension ViewController: HomePresenterDelegate {
     }
 }
 
-extension ViewController: UITableViewDelegate {
+extension HomeViewController: UITableViewDelegate {
     
 }
 
-extension ViewController: UITableViewDataSource {
+extension HomeViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
 //        return presenter.numberOfSections()
         return 1
