@@ -21,7 +21,7 @@ protocol HomeListOfTeamViewModelProtocol {
 }
 
 protocol HomePresenterProtocol {
-    func retrieveBy(league: String)
+    func retrieveBy(name: String)
     func numberOfRows() -> Int
     func numberOfSections() -> Int
     func cellForRowAt(_ index: Int) -> HomeListOfLeaguesViewModelProtocol?
@@ -30,7 +30,7 @@ protocol HomePresenterProtocol {
 
 protocol HomePresenterDelegate: class {
     func emptyLeague()
-    func displayLeaguesSarch()
+    func displayLeaguesSearch()
 }
 
 final class HomePresenter {
@@ -40,8 +40,7 @@ final class HomePresenter {
     weak var delegate: HomePresenterDelegate?
     
     private let leaguesRepository: LeaguesDataRepositoryProtocol
-    
-    private var currentSeachLeagues: [HomeListOfLeaguesViewModelProtocol] = []
+    private var currentSearchLeagues: [HomeListOfLeaguesViewModelProtocol] = []
     private var currentTeamLeague: [HomeListOfTeamViewModelProtocol] = []
     
     // MARK:  Init
@@ -53,15 +52,15 @@ final class HomePresenter {
 }
 
 extension HomePresenter: HomePresenterProtocol {
-    func retrieveBy(league: String) {
-        self.leaguesRepository.retrieveBy(leagues: league, success: {[weak self] leagues in
+    func retrieveBy(name: String) {
+        self.leaguesRepository.retrieveLeaguesBy(name: name, success: {[weak self] leagues in
             guard let self = self else { return }
             
-            self.currentSeachLeagues = leagues.map( {
-                HomeListOfLeaguesViewModel(title: $0.leagueName)
-            })
+            self.currentSearchLeagues = leagues.map {
+                HomeListOfLeaguesViewModel(title: $0.name)
+            }
+            self.delegate?.displayLeaguesSearch()
             
-            self.delegate?.displayLeaguesSarch()
         }, failure: {[weak self] error in
             guard let self = self else { return }
             
@@ -70,7 +69,7 @@ extension HomePresenter: HomePresenterProtocol {
     }
     
     func numberOfRows() -> Int {
-        return self.currentSeachLeagues.count
+        return self.currentSearchLeagues.count
     }
     
     func numberOfSections() -> Int {
@@ -81,7 +80,7 @@ extension HomePresenter: HomePresenterProtocol {
         // TODO: check si index exist
 //        self.currentSeachLeagues[index] else { return nil }
         
-        return self.currentSeachLeagues[index]
+        return self.currentSearchLeagues[index]
     }
     
     func didSelect(_ index: Int) {
@@ -93,7 +92,7 @@ extension HomePresenter: HomePresenterProtocol {
         // self.delegate?.hideSearch()
         
         
-        let league = self.currentSeachLeagues[index]
+//        let league = self.currentSeachLeagues[index]
         
 //        self.teamRepository.retrieveBy(league, success: { teams in
 //            convert teams via => viewModel

@@ -26,25 +26,13 @@ protocol LeaguesApiRepositoryProtocol {
                   failure: @escaping (LeaguesApiRepositoryError) -> Void)
 }
 
-// FAIRE 2 REPO : 1 - retrive API : 2- SAVE / RETrieveBY
-
-final class LeaguesApiRepository
-{
+final class LeaguesApiRepository {
     
     private let requestManager: RequestManagerProtocol
     
     init(requestManager: RequestManagerProtocol = RequestManager()) {
         self.requestManager = requestManager
     }
-    //TO DO
-    //Class pour l'appel reseau
-    
-//    var currentLeaguesResponse: [LeaguesResponseProtocol]
-    
-//    private init() {}
-    
-    
-    
 }
 
 extension LeaguesApiRepository: LeaguesApiRepositoryProtocol {
@@ -75,9 +63,6 @@ extension LeaguesApiRepository: LeaguesApiRepositoryProtocol {
             }
             
         }
-        // Appel WS =>
-        
-        // convert data via decodable + retoune success ou failure.
         // Ce n'est pas le repo qui décide de save mais le métier == PRESENTER
     }
 }

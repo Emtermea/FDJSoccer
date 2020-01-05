@@ -12,14 +12,18 @@ enum LeaguesDataRepositoryError: Error {
     case empty
 }
 
-protocol LeaguesDataRepositoryItemProtocol {
-    var leagueName: String { get }
-}
+//protocol LeaguesDataRepositoryItemProtocol {
+//    var leagueName: String { get }
+//}
 
 protocol LeaguesDataRepositoryProtocol {
     func retrieveBy(leagues: String,
-                    success: @escaping ([LeaguesDataRepositoryItemProtocol]) -> Void,
+                    success: @escaping ([Leagues.League]) -> Void,
                     failure: @escaping (LeaguesDataRepositoryError) -> Void)
+    func retrieveLeaguesBy(name: String,
+                           success: @escaping ([Leagues.League]) -> Void,
+                           failure: @escaping (LeaguesDataRepositoryError) -> Void)
+    func saveLeagues(_ leagues: Leagues)
 }
 
 // FAIRE 2 REPO : 1 - retrive API : 2- SAVE / RETrieveBY
@@ -31,13 +35,11 @@ final class LeaguesDataRepository {
 //    var currentLeaguesResponse: [LeaguesResponseProtocol]
     
 //    private init() {}
-    
-    
 }
 
 extension LeaguesDataRepository: LeaguesDataRepositoryProtocol {
     func retrieveBy(leagues: String,
-                    success: @escaping ([LeaguesDataRepositoryItemProtocol]) -> Void,
+                    success: @escaping ([Leagues.League]) -> Void,
                     failure: @escaping (LeaguesDataRepositoryError) -> Void) {
         // NE PAS OUBLIER SUPPRIMER ESPACE POUR %20
         
@@ -58,19 +60,30 @@ extension LeaguesDataRepository: LeaguesDataRepositoryProtocol {
         
     }
     
+    func retrieveLeaguesBy(name: String,
+                           success: @escaping ([Leagues.League]) -> Void,
+                           failure: @escaping (LeaguesDataRepositoryError) -> Void) {
+        let filtered = LeaguesData.shared.leagues.leagues.filter {
+            $0.name.caseInsensitiveCompare(name) == .orderedSame
+        }
+        
+        if filtered.isEmpty {
+            failure(.empty)
+        } else {
+            success(filtered)
+        }
+    }
+    
 //    func save(request: [LeguesRequestProtocol]) {
 //     currentLeaguesResponse = request
 //    }
     
-//    func retrieve(success: @escaping([LeaguesRepositoryItemProtocol]) -> Void,
-//                  failure: @escaping(Error) -> Void) {
-//        // Appel WS =>
-//        
-//        // convert data via decodable + retoune success ou failure.
-//        // Ce n'est pas le repo qui décide de save mais le métier == PRESENTER
-//    }
+
+    func saveLeagues(_ leagues: Leagues) {
+        LeaguesData.shared.save(leagues)
+    }
 }
 
-private struct LeaguesDataRepositoryItem: LeaguesDataRepositoryItemProtocol {
-    var leagueName: String
-}
+//private struct LeaguesDataRepositoryItem: LeaguesDataRepositoryItemProtocol {
+//    var leagueName: String
+//}
