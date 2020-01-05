@@ -11,7 +11,7 @@ import UIKit
 class SplashScreenModule {
     func makeView() -> UIViewController {
         
-        guard let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SplashScreenViewController") as? SplashScreenViewController else {
+        guard let viewController = UIStoryboard.init(name: "SplashScreen", bundle: nil).instantiateViewController(withIdentifier: "SplashScreenViewController") as? SplashScreenViewController else {
             return UIViewController()
         }
         
