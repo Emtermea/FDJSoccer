@@ -14,6 +14,7 @@ private let baseUrl: String = "https://www.thesportsdb.com/api/v1/json/1/"
 protocol RequestManagerProtocol {
     func fetchLeagues() -> DataRequest
     func fetchTeams(in league: String) -> DataRequest
+    func fetchPlayers(in team: String) -> DataRequest
 }
 
 final class RequestManager {
@@ -29,5 +30,10 @@ extension RequestManager: RequestManagerProtocol {
     func fetchTeams(in league: String) -> DataRequest {
         let urlTeams = URL(string: "\(baseUrl)search_all_teams.php?l=\(league.replacingOccurrences(of: " ", with: "%20"))")!
         return AF.request(urlTeams)
+    }
+    
+    func fetchPlayers(in team: String) -> DataRequest {
+        let urlPlayers = URL(string: "\(baseUrl)searchplayers.php?t=\(team.replacingOccurrences(of: " ", with: "%20"))")!
+        return AF.request(urlPlayers)
     }
 }
