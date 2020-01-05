@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class TeamCollectionViewCell: UICollectionViewCell {
 
@@ -16,11 +17,10 @@ class TeamCollectionViewCell: UICollectionViewCell {
     //MARK: - Properties
     var viewModel: HomeTeamsListViewModelProtocol? {
         didSet {
-            //TO DO - KINGFISHER
-            self.imageView.image = UIImage(named: "team_placeholder")
-            
             if let imageUrl = self.viewModel?.imageUrl, let url = URL(string: imageUrl) {
-                
+                self.imageView.kf.setImage(with: url,
+                                           placeholder: UIImage(named: "team_placeholder"),
+                                           options: [.transition(.fade(1))])
             }
         }
     }

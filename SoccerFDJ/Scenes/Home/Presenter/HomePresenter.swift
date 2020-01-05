@@ -18,6 +18,7 @@ protocol HomeLeaguesListViewModelProtocol {
 
 protocol HomeTeamsListViewModelProtocol {
     var imageUrl: String { get }
+    var teamName: String { get }
 }
 
 protocol HomePresenterProtocol {
@@ -45,6 +46,7 @@ final class HomePresenter {
     
     // MARK:  Properties
     
+    private let router: HomeRouterProtocol
     weak var delegate: HomePresenterDelegate?
     private let leaguesRepository: LeaguesDataRepositoryProtocol
     private var currentSearchLeagues: [HomeLeaguesListViewModelProtocol] = []
@@ -55,9 +57,11 @@ final class HomePresenter {
     // MARK:  Init
     
     init(leaguesRepository: LeaguesDataRepositoryProtocol,
-         teamsRepository: TeamsRepositoryProtocol) {
+         teamsRepository: TeamsRepositoryProtocol,
+         router: HomeRouterProtocol) {
         self.leaguesRepository = leaguesRepository
         self.teamsRepository = teamsRepository
+        self.router = router
     }
 }
 
@@ -114,7 +118,7 @@ extension HomePresenter: HomePresenterProtocol {
             self.delegate?.hideSearchController()
             
             self.currentLeagueTeams = teams.teams.map {
-                HomeTeamsListViewModel(imageUrl: $0.badge)
+                HomeTeamsListViewModel(imageUrl: $0.badge, teamName: $0.name)
             }
             self.delegate?.reloadTeams()
             
@@ -145,7 +149,7 @@ extension HomePresenter: HomePresenterProtocol {
         self.delegate?.reloadTeams()
         
         let viewModel = self.currentLeagueTeams[index]
-        // TO DO: handle selection
+        self.router.routeToPlayersList(of: viewModel.teamName)
     }
     
 }
@@ -156,4 +160,5 @@ private struct HomeLeaguesListViewModel: HomeLeaguesListViewModelProtocol {
 
 private struct HomeTeamsListViewModel: HomeTeamsListViewModelProtocol {
     var imageUrl: String
+    var teamName: String
 }
