@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         // faire barre search + > 3 char + delay 0.2
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.presenter.retrieveBy(league: "lig")
+//        self.presenter.retrieveBy(league: "lig")
     }
 
 }
@@ -43,11 +43,13 @@ extension ViewController: UITableViewDelegate {
 
 extension ViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter.numberOfSections()
+//        return presenter.numberOfSections()
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.numberOfRows()
+//        return presenter.numberOfRows()
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,7 +57,7 @@ extension ViewController: UITableViewDataSource {
         
         let cell = UITableViewCell()
         
-        let viewModel = presenter.cellForRowAt(indexPath.row)
+//        let viewModel = presenter.cellForRowAt(indexPath.row)
         
 //        cell.configure(viewModel)
         
