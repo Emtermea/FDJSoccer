@@ -21,9 +21,13 @@ final class HomeRouter: HomeRouterProtocol {
     
     private func makePlayersListViewController(of team: String) -> PlayersListViewController {
         let story = UIStoryboard.init(name: "Main", bundle: nil)
+        
+        let requestManager = RequestManager()
         let playersViewController = story.instantiateViewController(identifier: "PlayersListViewController") as! PlayersListViewController
         let router = PlayersRouter(playersListViewController: playersViewController)
-        let presenter = PlayersListPresenter(playersRepository: PlayersRepository(), teamName: team,  router: router)
+        let presenter = PlayersListPresenter(playersRepository: PlayersRepository(requestManager: requestManager),
+                                             teamName: team,
+                                             router: router)
         
         presenter.delegate = playersViewController
         playersViewController.presenter = presenter

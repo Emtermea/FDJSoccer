@@ -23,7 +23,7 @@ final class PlayersRepository {
     
     private let requestManager: RequestManagerProtocol
     
-    init(requestManager: RequestManagerProtocol = RequestManager()) {
+    init(requestManager: RequestManagerProtocol) {
         self.requestManager = requestManager
     }
 }

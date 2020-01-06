@@ -18,10 +18,12 @@ final class SplashScreenRouter: SplashScreenRouterProtocol {
     
     private func makeHomeViewController() -> HomeViewController {
         let story = UIStoryboard.init(name: "Main", bundle: nil)
+        
+        let requestManager = RequestManager()
         let homeViewController = story.instantiateViewController(identifier: "ViewController") as! HomeViewController
         let router = HomeRouter(homeViewController: homeViewController)
         let presenter = HomePresenter(leaguesRepository: LeaguesDataRepository(),
-                                      teamsRepository: TeamsRepository(), 
+                                      teamsRepository: TeamsRepository(requestManager: requestManager),
                                       router: router)
         
         presenter.delegate = homeViewController
