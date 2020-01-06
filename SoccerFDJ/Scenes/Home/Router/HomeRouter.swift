@@ -13,7 +13,7 @@ protocol HomeRouterProtocol {
 }
 
 final class HomeRouter: HomeRouterProtocol {
-    private let homeViewController: UIViewController
+    weak var homeViewController: UIViewController?
     
     init(homeViewController: HomeViewController) {
         self.homeViewController = homeViewController
@@ -37,6 +37,6 @@ final class HomeRouter: HomeRouterProtocol {
     }
     
     func routeToPlayersList(of team: String) {
-        homeViewController.navigationController?.pushViewController(makePlayersListViewController(of: team), animated: false)
+        homeViewController?.navigationController?.pushViewController(makePlayersListViewController(of: team), animated: false)
     }
 }

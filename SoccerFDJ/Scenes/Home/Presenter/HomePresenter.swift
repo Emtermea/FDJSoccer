@@ -125,7 +125,8 @@ extension HomePresenter: HomePresenterProtocol {
             }
             self.delegate?.reloadTeams()
             
-            }, failure: { error in
+            }, failure: {[weak self] error in
+                guard let self = self else { return }
                 self.delegate?.showAlert()
         })
     }

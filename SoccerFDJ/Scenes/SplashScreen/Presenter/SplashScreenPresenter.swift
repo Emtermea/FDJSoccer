@@ -36,11 +36,14 @@ final class SplashScreenPresenter {
 
 extension SplashScreenPresenter: SplashScreenPresenterProtocol {
     func retrieve() {
-        self.leaguesApiRepository.retrieve(success: { leagues in
+        self.leaguesApiRepository.retrieve(success: {[weak self] leagues in
+            guard let self = self else { return }
+            
             self.leaguesDataRepository.saveLeagues(self.filterLeaguesBySoccer(leagues))
             self.router.routeToHome()
-        }, failure: { error in
-            self.delegate?.showAlert()
+            }, failure: {[weak self] error in
+                guard let self = self else { return }
+                self.delegate?.showAlert()
         })
     }
     
