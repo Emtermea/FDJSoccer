@@ -20,7 +20,7 @@ protocol LeaguesDataRepositoryProtocol {
 }
 
 final class LeaguesDataRepository {
-
+    
 }
 
 extension LeaguesDataRepository: LeaguesDataRepositoryProtocol {
@@ -28,8 +28,6 @@ extension LeaguesDataRepository: LeaguesDataRepositoryProtocol {
                            success: @escaping ([Leagues.League]) -> Void,
                            failure: @escaping (LeaguesDataRepositoryError) -> Void) {
         let filtered = LeaguesData.shared.leagues.leagues.filter {
-            //TO DO - case insensitive
-//            $0.name.caseInsensitiveCompare(name) == .orderedSame
             $0.name.lowercased().contains(name.lowercased())
         }
         

@@ -59,9 +59,9 @@ extension PlayersListPresenter: PlayersListPresenterProtocol {
             
             self.delegate?.reloadPresenter()
             
-        }, failure: { error in
-            //TO DO : add alert with pop
-            print("failed retrieving players in \(self.teamName)")
+            }, failure: { error in
+                //TO DO : add alert with pop
+                print("failed retrieving players in \(self.teamName)")
         })
     }
     

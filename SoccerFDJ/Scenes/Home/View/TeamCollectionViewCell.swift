@@ -10,11 +10,13 @@ import UIKit
 import Kingfisher
 
 class TeamCollectionViewCell: UICollectionViewCell {
-
+    
     //MARK: - IBOutlet
+    
     @IBOutlet weak var imageView: UIImageView!
     
     //MARK: - Properties
+    
     var viewModel: HomeTeamsListViewModelProtocol? {
         didSet {
             if let imageUrl = self.viewModel?.imageUrl, let url = URL(string: imageUrl) {
@@ -26,9 +28,10 @@ class TeamCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: - Lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
 }

@@ -15,16 +15,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPZ-x6-DiG">
-                                <rect key="frame" x="142" y="296" width="168" height="161"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.83036249880000002" green="0.45105350020000001" blue="0.47841346260000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fdj-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Aio-xf-WQm">
+                                <rect key="frame" x="32" y="373" width="350" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="fFl-7j-vFm"/>
+                                    <constraint firstAttribute="width" constant="350" id="pI3-0G-RKv"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Aio-xf-WQm" firstAttribute="centerX" secondItem="zBc-0Z-woE" secondAttribute="centerX" id="LJn-Zi-Vp6"/>
+                            <constraint firstItem="Aio-xf-WQm" firstAttribute="centerY" secondItem="zBc-0Z-woE" secondAttribute="centerY" id="eD8-bt-T8W"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="t2I-6W-q5q"/>
                     </view>
                 </viewController>
@@ -33,4 +36,7 @@
             <point key="canvasLocation" x="192.75362318840581" y="13.392857142857142"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="fdj-logo" width="1200" height="649"/>
+    </resources>
 </document>

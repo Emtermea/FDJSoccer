@@ -14,10 +14,6 @@ enum LeaguesApiRepositoryError: Error {
 }
 
 protocol LeaguesApiRepositoryProtocol {
-    //    func retrieve(success: @escaping ([AllLeaguesRepositoryItemProtocol]) -> Void,
-    //                  failure: @escaping (AllLeaguesRepositoryError) -> Void) {
-        
-
     func retrieve(success: @escaping (Leagues) -> Void,
                   failure: @escaping (LeaguesApiRepositoryError) -> Void)
 }
@@ -57,8 +53,6 @@ extension LeaguesApiRepository: LeaguesApiRepositoryProtocol {
             } catch {
                 failure(.error(error))
             }
-            
         }
-        // Ce n'est pas le repo qui décide de save mais le métier == PRESENTER
     }
 }

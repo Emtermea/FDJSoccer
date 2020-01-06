@@ -15,8 +15,8 @@ enum PlayersRepositoryError: Error {
 
 protocol PlayersRepositoryProtocol {
     func retrievePlayers(in team: String,
-                       success: @escaping (Players) -> Void,
-                       failure: @escaping (PlayersRepositoryError) -> Void)
+                         success: @escaping (Players) -> Void,
+                         failure: @escaping (PlayersRepositoryError) -> Void)
 }
 
 final class PlayersRepository {
@@ -30,8 +30,8 @@ final class PlayersRepository {
 
 extension PlayersRepository: PlayersRepositoryProtocol {
     func retrievePlayers(in team: String,
-                       success: @escaping (Players) -> Void,
-                       failure: @escaping (PlayersRepositoryError) -> Void) {
+                         success: @escaping (Players) -> Void,
+                         failure: @escaping (PlayersRepositoryError) -> Void) {
         
         self.requestManager.fetchPlayers(in: team).responseJSON { response in
             guard let data = response.data else {

@@ -13,7 +13,7 @@ class SplashScreenViewController: UIViewController {
     // MARK: - Property
     
     var presenter: SplashScreenPresenterProtocol!
-
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {

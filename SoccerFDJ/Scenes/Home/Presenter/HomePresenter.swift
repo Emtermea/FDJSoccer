@@ -44,7 +44,7 @@ protocol HomePresenterDelegate: class {
 
 final class HomePresenter {
     
-    // MARK:  Properties
+    // MARK: - Properties
     
     private let router: HomeRouterProtocol
     weak var delegate: HomePresenterDelegate?
@@ -54,7 +54,7 @@ final class HomePresenter {
     private var workItem = DispatchWorkItem(block: {})
     private let teamsRepository: TeamsRepositoryProtocol
     
-    // MARK:  Init
+    // MARK: - Init
     
     init(leaguesRepository: LeaguesDataRepositoryProtocol,
          teamsRepository: TeamsRepositoryProtocol,
@@ -75,10 +75,10 @@ extension HomePresenter: HomePresenterProtocol {
             }
             self.delegate?.displayLeaguesSearch()
             
-        }, failure: {[weak self] error in
-            guard let self = self else { return }
-            
-            self.delegate?.hideSearchController()
+            }, failure: {[weak self] error in
+                guard let self = self else { return }
+                
+                self.delegate?.hideSearchController()
         })
     }
     
@@ -95,6 +95,8 @@ extension HomePresenter: HomePresenterProtocol {
         })
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: workItem)
     }
+    
+    // MARK: - TableView
     
     func numberOfRows() -> Int {
         return self.currentSearchLeagues.count
@@ -129,7 +131,7 @@ extension HomePresenter: HomePresenterProtocol {
         })
     }
     
-    // MARK: Collection
+    // MARK: - CollectionView
     
     func numberOfItemsInCollection() -> Int {
         return currentLeagueTeams.count

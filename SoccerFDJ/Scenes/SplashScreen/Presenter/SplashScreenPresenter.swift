@@ -32,6 +32,7 @@ extension SplashScreenPresenter: SplashScreenPresenterProtocol {
             self.leaguesDataRepository.saveLeagues(self.filterLeaguesBySoccer(leagues))
             self.router.routeToHome()
         }, failure: { error in
+            //TO DO - allert if error
             //router
             //alert in home VC
         })

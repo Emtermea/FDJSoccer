@@ -24,7 +24,7 @@ final class HomeRouter: HomeRouterProtocol {
         let playersViewController = story.instantiateViewController(identifier: "PlayersListViewController") as! PlayersListViewController
         let router = PlayersRouter(playersListViewController: playersViewController)
         let presenter = PlayersListPresenter(playersRepository: PlayersRepository(), teamName: team,  router: router)
-
+        
         presenter.delegate = playersViewController
         playersViewController.presenter = presenter
         playersViewController.title = team

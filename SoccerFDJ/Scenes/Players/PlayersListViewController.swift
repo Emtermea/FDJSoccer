@@ -17,7 +17,7 @@ class PlayersListViewController: UIViewController {
     //MARK: - Properties
     var presenter: PlayersListPresenterProtocol!
     private let cellIdentifier = "PlayersListTableViewCell"
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,4 +80,4 @@ extension PlayersListViewController: UITableViewDataSource {
         return cell
     }
 }
- 
+
