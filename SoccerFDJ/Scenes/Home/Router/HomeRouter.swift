@@ -15,10 +15,6 @@ protocol HomeRouterProtocol {
 final class HomeRouter: HomeRouterProtocol {
     weak var homeViewController: UIViewController?
     
-    init(homeViewController: HomeViewController) {
-        self.homeViewController = homeViewController
-    }
-    
     func routeToPlayersList(of team: String) {
         homeViewController?.navigationController?.pushViewController(HomeModule().makePlayersListViewController(of: team),
                                                                      animated: false)

@@ -21,7 +21,9 @@ final class SplashScreenRouter: SplashScreenRouterProtocol {
         
         let requestManager = RequestManager()
         let homeViewController = story.instantiateViewController(identifier: "ViewController") as! HomeViewController
-        let router = HomeRouter(homeViewController: homeViewController)
+
+        let router = HomeRouter()
+        router.homeViewController = homeViewController
         let presenter = HomePresenter(leaguesRepository: LeaguesDataRepository(),
                                       teamsRepository: TeamsRepository(requestManager: requestManager),
                                       router: router)
