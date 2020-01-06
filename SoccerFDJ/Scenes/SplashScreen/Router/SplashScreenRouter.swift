@@ -37,7 +37,7 @@ final class SplashScreenRouter: SplashScreenRouterProtocol {
     
     func routeToHomeWithAlert() {
         let viewController = self.makeHomeViewController()
-        viewController.showAlert(isBlockingAction: true)
+        viewController.showAlert()
         splashViewController?.navigationController?.pushViewController(viewController, animated: false)
     }
 }

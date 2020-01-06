@@ -40,7 +40,7 @@ protocol HomePresenterDelegate: class {
     func displayLeaguesSearch()
     
     func reloadTeams()
-    func showAlert(isBlockingAction: Bool)
+    func showAlert()
 }
 
 final class HomePresenter {
@@ -126,7 +126,7 @@ extension HomePresenter: HomePresenterProtocol {
             self.delegate?.reloadTeams()
             
             }, failure: { error in
-                self.delegate?.showAlert(isBlockingAction: false)
+                self.delegate?.showAlert()
         })
     }
     

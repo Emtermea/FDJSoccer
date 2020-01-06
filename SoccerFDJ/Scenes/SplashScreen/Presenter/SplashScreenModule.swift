@@ -23,7 +23,7 @@ class SplashScreenModule {
         let presenter = SplashScreenPresenter(leaguesApiRepository: leaguesApiRepository,
                                               leaguesDataRepository: leaguesDataRepository,
                                               router: router)
-        
+        presenter.delegate = viewController
         viewController.presenter = presenter
         router.splashViewController = viewController
         

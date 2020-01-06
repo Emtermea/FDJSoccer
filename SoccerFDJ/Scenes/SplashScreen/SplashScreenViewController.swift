@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SplashScreenViewController: UIViewController {
+final class SplashScreenViewController: UIViewController {
     
     // MARK: - Property
     
@@ -20,5 +20,21 @@ class SplashScreenViewController: UIViewController {
         super.viewDidLoad()
         
         self.presenter.retrieve()
+    }
+}
+
+extension SplashScreenViewController: SplashScreenPresenterDelegate {
+    func showAlert() {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "An error has occurred",
+                                          message: "Please check your internet connection",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                alert.dismiss(animated: true, completion: {
+                    self.presenter.retrieve()
+                })
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }

@@ -12,7 +12,15 @@ protocol SplashScreenPresenterProtocol {
     func retrieve()
 }
 
+protocol SplashScreenPresenterDelegate: class {
+    func showAlert()
+}
+
 final class SplashScreenPresenter {
+    
+    // MARK: - Properties
+    
+    weak var delegate: SplashScreenPresenterDelegate?
     private let leaguesApiRepository: LeaguesApiRepositoryProtocol
     private let leaguesDataRepository: LeaguesDataRepositoryProtocol
     private let router: SplashScreenRouterProtocol
@@ -32,7 +40,7 @@ extension SplashScreenPresenter: SplashScreenPresenterProtocol {
             self.leaguesDataRepository.saveLeagues(self.filterLeaguesBySoccer(leagues))
             self.router.routeToHome()
         }, failure: { error in
-            self.router.routeToHomeWithAlert()
+            self.delegate?.showAlert()
         })
     }
     

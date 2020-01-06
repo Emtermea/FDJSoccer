@@ -92,20 +92,17 @@ extension HomeViewController: HomePresenterDelegate {
         self.searchController.isActive = false
     }
     
-    func showAlert(isBlockingAction: Bool) {
+    func showAlert() {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "Oups",
                                           message: "An error has occurred",
                                           preferredStyle: .alert)
-            if !isBlockingAction {
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                     alert.dismiss(animated: true, completion: nil)
                 }))
-            }
             self.present(alert, animated: true, completion: nil)
+            }
         }
-    }
-    
 }
 
 extension HomeViewController: UISearchResultsUpdating {
