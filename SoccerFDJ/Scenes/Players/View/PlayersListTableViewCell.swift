@@ -20,7 +20,7 @@ class PlayersListTableViewCell: UITableViewCell {
     // MARK: Properties
     
     // MARK: - Lifecycle
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -41,9 +41,9 @@ class PlayersListTableViewCell: UITableViewCell {
             pictureUrl = url
         }
         self.profileImageView.kf.indicatorType = .activity
-                    self.profileImageView.kf.setImage(with: pictureUrl,
-                                               placeholder: UIImage(named: "team_placeholder"),
-                                               options: [.transition(.fade(1))])
+        self.profileImageView.kf.setImage(with: pictureUrl,
+                                          placeholder: UIImage(named: "player-placeholder"),
+                                          options: [.transition(.fade(1))])
     }
     
 }

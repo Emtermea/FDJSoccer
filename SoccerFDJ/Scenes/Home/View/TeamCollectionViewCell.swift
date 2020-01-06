@@ -19,7 +19,7 @@ class TeamCollectionViewCell: UICollectionViewCell {
         didSet {
             if let imageUrl = self.viewModel?.imageUrl, let url = URL(string: imageUrl) {
                 self.imageView.kf.setImage(with: url,
-                                           placeholder: UIImage(named: "team_placeholder"),
+                                           placeholder: UIImage(named: "team-placeholder"),
                                            options: [.transition(.fade(1))])
             }
         }
