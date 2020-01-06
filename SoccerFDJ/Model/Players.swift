@@ -26,6 +26,7 @@ extension Players {
         let position: String
         let price: String
         let profileUrl: String?
+        let thumbUrl: String
         let birthDate: String
         
         enum CodingKeys: String, CodingKey {
@@ -34,6 +35,7 @@ extension Players {
             case position = "strPosition"
             case price = "strSigning"
             case profileUrl = "strCutout"
+            case thumbUrl = "strThumb"
             case birthDate = "dateBorn"
         }
     }

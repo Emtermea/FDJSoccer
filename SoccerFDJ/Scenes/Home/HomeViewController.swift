@@ -35,7 +35,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationItem.setHidesBackButton(true, animated: false)
         self.setupView()
         self.setupSearchController()
         self.setupTableView()
@@ -49,6 +48,7 @@ class HomeViewController: UIViewController {
     
     private func setupView() {
         self.view.backgroundColor = .white
+        self.navigationItem.setHidesBackButton(true, animated: false)
     }
     
     private func setupSearchController() {

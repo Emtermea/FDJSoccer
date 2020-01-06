@@ -21,6 +21,7 @@ protocol PlayersListViewModelProtocol {
     var position: String { get }
     var price: String { get }
     var profileUrl: String? { get }
+    var thumbUrl: String { get }
     var birthDate: String { get }
 }
 
@@ -84,6 +85,7 @@ private struct PlayersListViewModel: PlayersListViewModelProtocol {
     var position: String
     var price: String
     var profileUrl: String?
+    var thumbUrl: String
     var birthDate: String
     
     init(_ player: Players.Player) {
@@ -91,6 +93,7 @@ private struct PlayersListViewModel: PlayersListViewModelProtocol {
         self.position = player.position
         self.price = player.price
         self.profileUrl = player.profileUrl
+        self.thumbUrl = player.thumbUrl
         self.birthDate = player.birthDate
     }
 }

@@ -29,6 +29,8 @@ class PlayersListViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.tableFooterView = UIView()
+        self.tableView.estimatedRowHeight = 180.0
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         self.tableView.backgroundColor = .white
     }
