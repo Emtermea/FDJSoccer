@@ -56,6 +56,20 @@ extension PlayersListViewController: PlayersListPresenterDelegate {
             self.tableView.reloadData()
         }
     }
+    
+    func showAlert() {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Oups",
+                                          message: "An error has occurred",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                alert.dismiss(animated: true, completion: {
+                    self.navigationController?.popViewController(animated: true)
+                })
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 }
 
 extension PlayersListViewController: UITableViewDelegate {

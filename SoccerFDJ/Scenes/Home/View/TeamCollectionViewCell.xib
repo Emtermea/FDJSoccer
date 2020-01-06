@@ -25,7 +25,7 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="u9c-Sh-OSO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="leading" priority="999" constant="4" id="0aN-q5-vib"/>
+                <constraint firstItem="u9c-Sh-OSO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="0aN-q5-vib"/>
                 <constraint firstItem="u9c-Sh-OSO" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="1Lw-La-hSS"/>
                 <constraint firstItem="u9c-Sh-OSO" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="sR7-b3-xDM"/>
                 <constraint firstItem="u9c-Sh-OSO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="yCU-27-iM5"/>

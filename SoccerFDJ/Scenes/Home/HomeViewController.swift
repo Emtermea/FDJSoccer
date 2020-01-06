@@ -92,6 +92,20 @@ extension HomeViewController: HomePresenterDelegate {
         self.searchController.isActive = false
     }
     
+    func showAlert(isBlockingAction: Bool) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Oups",
+                                          message: "An error has occurred",
+                                          preferredStyle: .alert)
+            if !isBlockingAction {
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                    alert.dismiss(animated: true, completion: nil)
+                }))
+            }
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
 }
 
 extension HomeViewController: UISearchResultsUpdating {
@@ -156,7 +170,7 @@ extension HomeViewController: UICollectionViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.bounds.width / 2.0), height: 100.0)
+        return CGSize(width: (collectionView.bounds.width / 2.0), height: 150.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

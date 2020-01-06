@@ -43,6 +43,7 @@ protocol PlayersListPresenterDelegate: class {
     func startLoading()
     func stopLoading()
     func reloadPresenter()
+    func showAlert()
 }
 
 extension PlayersListPresenter: PlayersListPresenterProtocol {
@@ -60,8 +61,7 @@ extension PlayersListPresenter: PlayersListPresenterProtocol {
             self.delegate?.reloadPresenter()
             
             }, failure: { error in
-                //TO DO : add alert with pop
-                print("failed retrieving players in \(self.teamName)")
+                self.delegate?.showAlert()
         })
     }
     

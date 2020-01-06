@@ -10,6 +10,7 @@ import UIKit
 
 protocol SplashScreenRouterProtocol {
     func routeToHome()
+    func routeToHomeWithAlert()
 }
 
 final class SplashScreenRouter: SplashScreenRouterProtocol {
@@ -32,5 +33,11 @@ final class SplashScreenRouter: SplashScreenRouterProtocol {
     
     func routeToHome() {
         splashViewController?.navigationController?.pushViewController(makeHomeViewController(), animated: false)
+    }
+    
+    func routeToHomeWithAlert() {
+        let viewController = self.makeHomeViewController()
+        viewController.showAlert(isBlockingAction: true)
+        splashViewController?.navigationController?.pushViewController(viewController, animated: false)
     }
 }
