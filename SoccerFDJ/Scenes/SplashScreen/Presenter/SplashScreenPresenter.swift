@@ -13,16 +13,16 @@ protocol SplashScreenPresenterProtocol {
 }
 
 final class SplashScreenPresenter {
-    private let router: SplashScreenRouterProtocol
     private let leaguesApiRepository: LeaguesApiRepositoryProtocol
     private let leaguesDataRepository: LeaguesDataRepositoryProtocol
+    private let router: SplashScreenRouterProtocol
     
-    init(router: SplashScreenRouterProtocol,
-         leaguesApiRepository: LeaguesApiRepositoryProtocol = LeaguesApiRepository(),
-         leaguesDataRepository: LeaguesDataRepositoryProtocol = LeaguesDataRepository()) {
-        self.router = router
+    init(leaguesApiRepository: LeaguesApiRepositoryProtocol,
+         leaguesDataRepository: LeaguesDataRepositoryProtocol,
+         router: SplashScreenRouterProtocol) {
         self.leaguesApiRepository = leaguesApiRepository
         self.leaguesDataRepository = leaguesDataRepository
+        self.router = router
     }
 }
 

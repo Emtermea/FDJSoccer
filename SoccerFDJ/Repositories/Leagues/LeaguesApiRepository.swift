@@ -26,7 +26,7 @@ final class LeaguesApiRepository {
     
     private let requestManager: RequestManagerProtocol
     
-    init(requestManager: RequestManagerProtocol = RequestManager()) {
+    init(requestManager: RequestManagerProtocol) {
         self.requestManager = requestManager
     }
 }

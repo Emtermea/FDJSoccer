@@ -16,7 +16,13 @@ class SplashScreenModule {
         }
         
         let router = SplashScreenRouter()
-        let presenter = SplashScreenPresenter(router: router)
+        let requestManager = RequestManager()
+        let leaguesApiRepository = LeaguesApiRepository(requestManager: requestManager)
+        let leaguesDataRepository = LeaguesDataRepository()
+        
+        let presenter = SplashScreenPresenter(leaguesApiRepository: leaguesApiRepository,
+                                              leaguesDataRepository: leaguesDataRepository,
+                                              router: router)
         
         viewController.presenter = presenter
         router.splashViewController = viewController
